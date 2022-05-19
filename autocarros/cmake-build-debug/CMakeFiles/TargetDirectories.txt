@@ -1,0 +1,3 @@
+/home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles/DA_T2_G36.dir

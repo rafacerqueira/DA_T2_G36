@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/rafael/2semestre/da/DA_T2_G36/main.cpp
+iostream
+-
+vector
+-
+fstream
+-
+transporte.cpp
+/home/rafael/2semestre/da/DA_T2_G36/transporte.cpp
+
+/home/rafael/2semestre/da/DA_T2_G36/transporte.cpp
+
