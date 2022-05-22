@@ -18,10 +18,12 @@ void cenario1_1(std::vector<transporte> vec, int origem_grupo, int destino_grupo
     }
 }
 int main() {
-    int graph[V][V];
     int x1, x2, x3, x4;
     std::vector<transporte> vec;
-    std::ifstream newfile("in01.txt");
+    std::ifstream newfile("input_simples.txt");
+    if(newfile.is_open()){
+        std::cout << "abriu" << std::endl;
+    }
     newfile >> x1 >> x2;
     V = x1;
     veiculos = x2;
@@ -30,14 +32,6 @@ int main() {
         vec.push_back(transporte(x1, x2, x3, x4, i));
     }
     newfile.close();
-    newfile.open("in01.txt");
-    newfile >> x1 >> x2;
-    for(int i=0; i<V; i++){
-        for(int j=0; j<V; j++){
-            newfile >> x1 >> x2 >> x3 >> x4;
-            graph[i][j] = x3;
-        }
-    }
     std::cout << "VERTICES: " << V << " ARESTAS: " << veiculos << std::endl;
     for(int i=0; i<veiculos; i++){
         std::cout << "origem: " << vec.at(i).origem << " "
@@ -47,6 +41,6 @@ int main() {
         << "id: " << vec.at(i).id << std::endl;
     }
     newfile.close();
-    cenario1_1(vec, 4,40);
+    cenario1_1(vec, 1,5);
     return 0;
 }

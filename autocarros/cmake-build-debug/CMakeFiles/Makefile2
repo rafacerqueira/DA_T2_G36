@@ -44,10 +44,10 @@ RM = /home/rafael/clion-2020.1/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafael/2semestre/da/DA_T2_G36
+CMAKE_SOURCE_DIR = /home/rafael/2semestre/da/DA_T2_G36/autocarros
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug
+CMAKE_BINARY_DIR = /home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,14 +74,14 @@ clean: CMakeFiles/DA_T2_G36.dir/clean
 CMakeFiles/DA_T2_G36.dir/all:
 	$(MAKE) -f CMakeFiles/DA_T2_G36.dir/build.make CMakeFiles/DA_T2_G36.dir/depend
 	$(MAKE) -f CMakeFiles/DA_T2_G36.dir/build.make CMakeFiles/DA_T2_G36.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target DA_T2_G36"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target DA_T2_G36"
 .PHONY : CMakeFiles/DA_T2_G36.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DA_T2_G36.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/DA_T2_G36.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/DA_T2_G36.dir/rule
 
 # Convenience name for target.

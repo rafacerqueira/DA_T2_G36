@@ -48,10 +48,10 @@ RM = /home/rafael/clion-2020.1/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafael/2semestre/da/DA_T2_G36
+CMAKE_SOURCE_DIR = /home/rafael/2semestre/da/DA_T2_G36/autocarros
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug
+CMAKE_BINARY_DIR = /home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles /home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug/CMakeFiles /home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/2semestre/da/DA_T2_G36/autocarros/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
