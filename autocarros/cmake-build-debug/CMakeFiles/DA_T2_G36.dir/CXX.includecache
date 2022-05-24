@@ -13,8 +13,14 @@ vector
 -
 fstream
 -
+cstdlib
+-
 transporte.cpp
 /home/rafael/2semestre/da/DA_T2_G36/autocarros/transporte.cpp
+list
+-
+string
+-
 
 /home/rafael/2semestre/da/DA_T2_G36/autocarros/transporte.cpp
 
