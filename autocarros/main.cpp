@@ -153,7 +153,7 @@ int main()
     std::ofstream output;
     output.open("output.txt");
     int x1, x2, x3, x4;
-    std::ifstream newfile("in01.txt");
+    std::ifstream newfile("input_simples.txt");
     newfile >> x1 >> x2;
     V = x1;
     veiculos = x2;
@@ -174,9 +174,24 @@ int main()
         adjMatrix[x1][x2]=x3;
     }
     newfile.close();
-    int source = 20, sink = 7;
-    output.close();
+    int source, sink;
+    int max_flow = 0;
+    int flow;
+    for(int i=1; i<=5; i++){
+        for(int j=1;j<=5; j++) {
+            int s = i, d = j;
+            cout << "entrou" << endl;
+            flow = FordFulkerson(adjMatrix, s, d);
+            cout << "saiu" << endl;
+            if (flow >= max_flow) {
+                max_flow = flow;
+                source = s;
+                sink = d;
+            }
+        }
+    }
     cout << "The max flow from " << source << " to " << sink << " is: ";
-    cout << FordFulkerson(adjMatrix, source, sink) << endl;
+    cout << max_flow << endl;
+    output.close();
     return 0;
 }
