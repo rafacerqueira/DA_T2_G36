@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/rafael/2semestre/da/DA_T2_G36/autocarros/main.cpp
-iostream
--
 vector
 -
 fstream
@@ -22,6 +20,20 @@ list
 string
 -
 queue
+-
+cstdio
+-
+queue
+-
+cstring
+-
+vector
+-
+iostream
+-
+fstream
+-
+list
 -
 
 /home/rafael/2semestre/da/DA_T2_G36/autocarros/transporte.cpp
