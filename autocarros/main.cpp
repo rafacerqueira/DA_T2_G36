@@ -94,8 +94,156 @@ void Graph::printAllPathsUtil(int u, int d, bool visited[],
 // A directed graph using
 // adjacency list representation
 
-int bfs(int sNode, int eNode)//breadth first search
-{
+void read(ifstream& file){
+    int control;
+    int capacidade = INFINITO ;
+    int capacidade_max=0;
+    std::string line;
+    std::getline(file, line);
+    int length = line.length();
+    int final[length] = { 0 };
+    do{
+        int arr[length] = { 0 };
+        int j = 0, i, sum = 0;
+
+        // Traverse the string
+        for (i = 0; line[i] != '\0'; i++) {
+            if (line[i] == ' '){
+                // Increment j to point to next
+                // array location
+                j++;
+            }
+            else {
+
+                // subtract str[i] by 48 to convert it to int
+                // Generate number by multiplying 10 and adding
+                // (int)(str[i])
+                arr[j] = arr[j] * 10 + (line[i] - 48);
+            }
+        }
+        control = j;
+        for (i = 0; i < j-1; i++) {
+            for(int k=i+1; k<i+2; k++){
+                if(c[arr[i]][arr[k]] < capacidade){
+                    capacidade = c[arr[i]][arr[k]];
+                }
+            }
+        }
+
+        if(capacidade >= capacidade_max){
+
+
+            for(int i=0; i<j; i++){
+                final[i] = arr[i];
+            }
+            capacidade_max = capacidade;
+        }
+        capacidade=INFINITO;
+    }while(std::getline(file, line));
+    cout << endl;
+    cout << "capacidade maxima: " <<capacidade_max << endl;
+    cout << "encaminhamento de capacidade maxima: ";
+    for(int i=0; i<=control; i++){
+        if(i==0){
+            cout << final[i];
+        }else{
+            cout<< " -> " << final[i];
+        }
+    }
+    cout << endl;
+
+}
+void read_transbordos(ifstream& file){
+    int transbordos = INFINITO;
+    int control;
+    int capacidade = INFINITO ;
+    int capacidade_max=0;
+    std::string line;
+    std::getline(file, line);
+    int length = line.length();
+    int final[length] = { 0 };
+    int menos_transbordos[length] = { 0 };
+    do{
+        int arr[length] = { 0 };
+        int j = 0, i, sum = 0;
+
+        // Traverse the string
+        for (i = 0; line[i] != '\0'; i++) {
+            if (line[i] == ' '){
+                // Increment j to point to next
+                // array location
+                j++;
+            }
+            else {
+
+                // subtract str[i] by 48 to convert it to int
+                // Generate number by multiplying 10 and adding
+                // (int)(str[i])
+                arr[j] = arr[j] * 10 + (line[i] - 48);
+            }
+        }
+        control = j;
+        if(j <= transbordos){
+            transbordos = j;
+            for(int i=0; i<=transbordos; i++){
+                menos_transbordos[i] = arr[i];
+            }
+        }
+        for (i = 0; i < j-1; i++) {
+            for(int k=i+1; k<i+2; k++){
+                if(c[arr[i]][arr[k]] < capacidade){
+                    capacidade = c[arr[i]][arr[k]];
+                }
+            }
+        }
+
+        if(capacidade >= capacidade_max){
+
+
+            for(int i=0; i<=j; i++){
+                final[i] = arr[i];
+            }
+            capacidade_max = capacidade;
+        }
+        capacidade=INFINITO;
+    }while(std::getline(file, line));
+
+    if(control==transbordos){
+        cout << endl;
+        cout << "capacidade maxima: " <<capacidade_max << endl;
+        cout << "encaminhamento de capacidade maxima e menos transbordos: ";
+        for(int i=0; i<=control; i++){
+            if(i==0){
+                cout << final[i];
+            }else{
+                cout<< " -> " << final[i];
+            }
+        }
+    }else{
+        cout << endl;
+        cout << "capacidade maxima: " <<capacidade_max << endl;
+        cout << "encaminhamento de capacidade maxima: ";
+        for(int i=0; i<=control; i++){
+            if(i==0){
+                cout << final[i];
+            }else{
+                cout<< " -> " << final[i];
+            }
+        }
+        cout << endl;
+        cout << "caminho com menos transbordos: " << endl;
+        for(int i=0; i<transbordos; i++){
+            if(i==0){
+                cout << menos_transbordos[i];
+            }else{
+                cout<< " -> " << menos_transbordos[i];
+            }
+        }
+
+    }
+}
+
+int bfs(int sNode, int eNode){
     memset(parList, -1, sizeof(parList));
     memset(currentPathC, 0, sizeof(currentPathC));
     queue<int> q;//declare queue vector
@@ -125,35 +273,10 @@ int bfs(int sNode, int eNode)//breadth first search
             }
         }
     }
+
     return 0;
 }
-void read(ifstream& file){
-    std::string line;
-    std::getline(file, line);
-    int length = line.length();
-    int arr[length]= { 0 };
-    int j = 0, i, sum = 0;
 
-    // Traverse the string
-    for (i = 0; line[i] != '\0'; i++) {
-        if (line[i] == ' '){
-            // Increment j to point to next
-            // array location
-            j++;
-        }
-        else {
-
-            // subtract str[i] by 48 to convert it to int
-            // Generate number by multiplying 10 and adding
-            // (int)(str[i])
-            arr[j] = arr[j] * 10 + (line[i] - 48);
-        }
-    }
-    for (i = 0; i < j; i++) {
-        cout << arr[i] << " ";
-    }
-
-}
 int edmondsKarp(int sNode, int eNode)
 {
     int maxFlow = 0;
@@ -169,7 +292,6 @@ int edmondsKarp(int sNode, int eNode)
         while(currNode != sNode)
         {
             int prevNode = parList[currNode];
-
             flowPassed[prevNode][currNode] += flow;
             flowPassed[currNode][prevNode] -= flow;
             currNode = prevNode;
@@ -177,39 +299,13 @@ int edmondsKarp(int sNode, int eNode)
     }
     return maxFlow;
 }
-void cenario2_3(){
+
+void cenario1_1() {
     std::ofstream output;
     output.open("output.txt");
     int nodCount, edCount;
     int x1, x2, x3, x4;
-    std::ifstream newfile("input_simples.txt");
-    newfile >> x1 >> x2;
-    nodCount=x1;
-    edCount=x2;
-    Graph graph(nodCount);
-    int source, sink;
-    source=1;
-    sink=x1;
-    for(int ed = 0; ed < edCount; ed++){
-        newfile >> x1 >> x2 >> x3 >> x4;
-        int from, to, cap;
-        from=x1;
-        to=x2;
-        cap=x3;
-        c[from][to] = cap;
-        g[from].push_back(to);
-        g[to].push_back(from);
-        graph.addEdge(x1,x2);
-    }
-    int maxFlow = edmondsKarp(source, sink);
-    cout<<"Max Flow is:"<<maxFlow<<endl;
-}
-void cenario1_1() {
-    std::ofstream output;
-    //output.open("output.txt");
-    int nodCount, edCount;
-    int x1, x2, x3, x4;
-    std::ifstream newfile("input_simples.txt");
+    std::ifstream newfile("in01_b.txt");
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
@@ -223,10 +319,34 @@ void cenario1_1() {
         c[x1][x2]=x3;
     }
     newfile.close();
-    //g.printAllPaths(1,5, output);
-    //output.close();
+    g.printAllPaths(1,nodCount, output);
+    output.close();
     std::ifstream file("output.txt");
     read(file);
+}
+void cenario1_2(){
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("in01_b.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    int source, sink;
+    source=1;
+    sink=x1;
+    Graph g(x1);
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        g.addEdge(x1,x2);
+        c[x1][x2]=x3;
+    }
+    newfile.close();
+    g.printAllPaths(1,nodCount, output);
+    output.close();
+    std::ifstream file("output.txt");
+    read_transbordos(file);
 }
 void cenario2_1(){
     std::ofstream output;
@@ -250,7 +370,6 @@ void cenario2_1(){
     c[x1][x1+1] = dimensao;
     g[x1].push_back(x1+1);
 
-    //50<-12<-46<-8<-1<-50<-41<-33<-6<-1<-50<-31<-40<-48<-8<-1<-50<-39<-19<-7<-37<-38<-1<-50<-39<-44<-22<-35<-38<-1<-50<-39<-17<-36<-10<-6<-1<-
 
     for(int ed = 0; ed < edCount; ed++){
         graph.addEdge(0,x1+1);
@@ -264,17 +383,50 @@ void cenario2_1(){
         g[to].push_back(from);
         graph.addEdge(x1,x2);
     }
-    edmondsKarp(source,sink);
+    cout << "max flow: " << edmondsKarp(source,sink) << endl;
 
 }
+void cenario2_3(){
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("input_simples.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    Graph graph(nodCount);
+    int source, sink;
+    source=1;
+    sink=5;
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        int from, to, cap;
+        from=x1;
+        to=x2;
+        cap=x3;
+        c[from][to] = cap;
+        g[from].push_back(to);
+        g[to].push_back(from);
+        graph.addEdge(x1,x2);
+    }
+    int maxFlow = edmondsKarp(1, 5);
+    cout<<"Max Flow is:"<<maxFlow<<endl;
+}
+
+
 void displaymenu(){ cout<<"===================================================== \n";
 cout<<" \t\tMENU \t \n ";
 cout<<"===================================================== \n";
-cout<<" 1.Determinar a dimensão máxima do grupo e um encaminhamento.\n";
-cout<<" 2.Maximizar a dimensão do grupo e minimizar o número de transbordos, sem privilegiar um dos critérios relativamente ao outro.\n";
+cout << "GRUPOS QUE NAO SE SEPARAM\n";
+cout<<" 1.Maximizar a dimensao do grupo e indicar encaminhamento.\n";
+cout<<" 2.Maximizar a dimensao do grupo e minimizar o número de transbordos, sem privilegiar um dos critérios relativamente ao outro.\n";
+cout<<"===================================================== \n";
+cout<<"GRUPOS QUE SE PODEM SEPARAR\n";
 cout<<" 3.Determinar um encaminhamento para um grupo, dada a sua dimensão.\n";
 cout<<" 4.View all student records \n";
-cout<<" 5.Find a student by ID \n";
+cout<<" 5.Determinar a dimensao maxima do grupo e um encaminhamento.\n";
+cout<<"===================================================== \n";
 }
 
 
@@ -285,9 +437,10 @@ int main(){
         cin>>yourchoice;
         switch (yourchoice)
         {
-            case 1: cenario2_3(); break;
-            case 2: cenario1_1();break;
+            case 1: cenario1_1(); break;
+            case 2: cenario1_2(); break;
             case 3: cenario2_1(); break;
+            case 5: cenario2_3(); break;
             default: cout<<"invalid"; break;
         }
 
