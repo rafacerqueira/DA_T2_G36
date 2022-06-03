@@ -689,7 +689,7 @@ cout<<"===================================================== \n";
 int main(){
     displaymenu();
     int yourchoice;
-     cout<<"Enter your choice(1-5):";
+     cout<<"Enter your choice(1-12):";
         cin>>yourchoice;
         switch (yourchoice)
         {
