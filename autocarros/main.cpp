@@ -5,7 +5,7 @@
 #include<iostream>
 #include <fstream>
 using namespace std;
-int c[5000][5000];
+int c[5000][5000]; // array that stores the capacity of 2 vertices
 int flowPassed[5000][5000];
 vector<int> g[5000];
 int parList[5000];
@@ -71,7 +71,7 @@ void Graph::printAllPathsUtil(int u, int d, bool visited[],
     path[path_index] = u;
     path_index++;
 
-    // If current vertex is same as destination, then print
+    // If current vertex is same as destination, then print to output
     // current path[]
     if (u == d) {
         for (int i = 0; i < path_index; i++)
@@ -91,17 +91,18 @@ void Graph::printAllPathsUtil(int u, int d, bool visited[],
     path_index--;
     visited[u] = false;
 }
-// A directed graph using
-// adjacency list representation
 
+//Function to calculate max capacity in a graph and print the path
 void read(ifstream& file){
     int control;
     int capacidade = INFINITO ;
     int capacidade_max=0;
     std::string line;
-    std::getline(file, line);
+    std::getline(file, line); // read file line by line
     int length = line.length();
-    int final[length] = { 0 };
+    int final[length] = { 0 }; //array containing the path with the bigger capacity
+
+    //do while cicle for saving every line inside the file inside a array to help the calculation
     do{
         int arr[length] = { 0 };
         int j = 0, i, sum = 0;
@@ -122,6 +123,7 @@ void read(ifstream& file){
             }
         }
         control = j;
+        // calculate the capacity by searching in the c[][] array that contains the capacity of each par u and v
         for (i = 0; i < j-1; i++) {
             for(int k=i+1; k<i+2; k++){
                 if(c[arr[i]][arr[k]] < capacidade){
@@ -140,6 +142,8 @@ void read(ifstream& file){
         }
         capacidade=INFINITO;
     }while(std::getline(file, line));
+
+
     cout << endl;
     cout << "capacidade maxima: " <<capacidade_max << endl;
     cout << "encaminhamento de capacidade maxima: ";
@@ -153,6 +157,8 @@ void read(ifstream& file){
     cout << endl;
 
 }
+
+//Function almost the same as read() but calculates the path with less transshipments
 void read_transbordos(ifstream& file){
     int transbordos = INFINITO;
     int control;
@@ -243,6 +249,7 @@ void read_transbordos(ifstream& file){
     }
 }
 
+//bfs function to help edmondsKarp algorithm
 int bfs(int sNode, int eNode){
     memset(parList, -1, sizeof(parList));
     memset(currentPathC, 0, sizeof(currentPathC));
@@ -276,6 +283,7 @@ int bfs(int sNode, int eNode){
 
     return 0;
 }
+//edmondsKarp function that returns the max flow
 int edmondsKarp_int(int sNode, int eNode){
     int maxFlow = 0;
     while(true){
@@ -297,6 +305,8 @@ int edmondsKarp_int(int sNode, int eNode){
     }
     return maxFlow;
 }
+
+//edmondsKarp function that prints the max flow and the path to the max flow
 void edmondsKarp(int sNode, int eNode, int dimensao){
     int maxFlow = 0;
     while(true){
@@ -331,6 +341,7 @@ void edmondsKarp(int sNode, int eNode, int dimensao){
 
 }
 
+// Functions for multiple testing
 void cenario1_1_in01() {
     std::ofstream output;
     output.open("output.txt");
@@ -340,10 +351,8 @@ void cenario1_1_in01() {
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
-    int source, sink;
-    source=1;
-    sink=x1;
     Graph g(x1);
+    //read numbers in file and save in graph g and save in array c[][] the capacity
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
         g.addEdge(x1,x2);
@@ -364,9 +373,6 @@ void cenario1_1_in02() {
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
-    int source, sink;
-    source=1;
-    sink=x1;
     Graph g(x1);
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
@@ -388,9 +394,6 @@ void cenario1_1_simples() {
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
-    int source, sink;
-    source=1;
-    sink=x1;
     Graph g(x1);
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
@@ -412,9 +415,6 @@ void cenario1_2_in01(){
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
-    int source, sink;
-    source=1;
-    sink=x1;
     Graph g(x1);
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
@@ -436,9 +436,6 @@ void cenario1_2_in02(){
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
-    int source, sink;
-    source=1;
-    sink=x1;
     Graph g(x1);
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
@@ -460,9 +457,6 @@ void cenario1_2_simples(){
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
-    int source, sink;
-    source=1;
-    sink=x1;
     Graph g(x1);
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
