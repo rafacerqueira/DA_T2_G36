@@ -276,12 +276,9 @@ int bfs(int sNode, int eNode){
 
     return 0;
 }
-
-int edmondsKarp(int sNode, int eNode)
-{
+int edmondsKarp_int(int sNode, int eNode){
     int maxFlow = 0;
-    while(true)
-    {
+    while(true){
         int flow = bfs(sNode, eNode);
         if (flow == 0)
         {
@@ -295,12 +292,46 @@ int edmondsKarp(int sNode, int eNode)
             flowPassed[prevNode][currNode] += flow;
             flowPassed[currNode][prevNode] -= flow;
             currNode = prevNode;
+
         }
     }
     return maxFlow;
 }
+void edmondsKarp(int sNode, int eNode, int dimensao){
+    int maxFlow = 0;
+    while(true){
+        int flow = bfs(sNode, eNode);
+        if (flow == 0)
+        {
+            break;
+        }
+        maxFlow += flow;
+        int currNode = eNode;
+        while(currNode != sNode)
+        {
+            int prevNode = parList[currNode];
+            flowPassed[prevNode][currNode] += flow;
+            flowPassed[currNode][prevNode] -= flow;
+            if(c[prevNode][currNode]>=0){
+                cout << currNode << " <- ";
+                if (prevNode == sNode || prevNode == eNode){
+                    cout << prevNode;
+                }
+            }
+            currNode = prevNode;
 
-void cenario1_1() {
+        }
+    cout << endl;
+    }
+    if(maxFlow >= dimensao){
+        cout << "maxflow is: " << maxFlow << endl;
+    }else{
+        cout << "Como fluxo maximo e: " << maxFlow << ", uma dimensao de " << dimensao << " nao e possivel levar pelo grafo." << endl;
+    }
+
+}
+
+void cenario1_1_in01() {
     std::ofstream output;
     output.open("output.txt");
     int nodCount, edCount;
@@ -324,7 +355,55 @@ void cenario1_1() {
     std::ifstream file("output.txt");
     read(file);
 }
-void cenario1_2(){
+void cenario1_1_in02() {
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("in02_b.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    int source, sink;
+    source=1;
+    sink=x1;
+    Graph g(x1);
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        g.addEdge(x1,x2);
+        c[x1][x2]=x3;
+    }
+    newfile.close();
+    g.printAllPaths(1,nodCount, output);
+    output.close();
+    std::ifstream file("output.txt");
+    read(file);
+}
+void cenario1_1_simples() {
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("input_simples.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    int source, sink;
+    source=1;
+    sink=x1;
+    Graph g(x1);
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        g.addEdge(x1,x2);
+        c[x1][x2]=x3;
+    }
+    newfile.close();
+    g.printAllPaths(1,nodCount, output);
+    output.close();
+    std::ifstream file("output.txt");
+    read(file);
+}
+void cenario1_2_in01(){
     std::ofstream output;
     output.open("output.txt");
     int nodCount, edCount;
@@ -348,7 +427,55 @@ void cenario1_2(){
     std::ifstream file("output.txt");
     read_transbordos(file);
 }
-void cenario2_1(){
+void cenario1_2_in02(){
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("in02_b.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    int source, sink;
+    source=1;
+    sink=x1;
+    Graph g(x1);
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        g.addEdge(x1,x2);
+        c[x1][x2]=x3;
+    }
+    newfile.close();
+    g.printAllPaths(1,nodCount, output);
+    output.close();
+    std::ifstream file("output.txt");
+    read_transbordos(file);
+}
+void cenario1_2_simples(){
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("input_simples.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    int source, sink;
+    source=1;
+    sink=x1;
+    Graph g(x1);
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        g.addEdge(x1,x2);
+        c[x1][x2]=x3;
+    }
+    newfile.close();
+    g.printAllPaths(1,nodCount, output);
+    output.close();
+    std::ifstream file("output.txt");
+    read_transbordos(file);
+}
+void cenario2_1_in01(){
     std::ofstream output;
     output.open("output.txt");
     int dimensao;
@@ -383,12 +510,54 @@ void cenario2_1(){
         g[to].push_back(from);
         graph.addEdge(x1,x2);
     }
-    cout << "max flow: " << edmondsKarp(source,sink) << endl;
+    edmondsKarp(source,sink, dimensao);
 
 }
-void cenario2_3(){
+void cenario2_1_in02(){
     std::ofstream output;
     output.open("output.txt");
+    int dimensao;
+    cout << "Que dimensao pretende?" << endl;
+    cin >> dimensao;
+    cout << "dimensao de: " << dimensao << endl;
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("in02_b.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    Graph graph(nodCount);
+    int source, sink;
+    source=0;
+    sink=x1+1;
+    c[0][1] = dimensao;
+    g[0].push_back(1);
+    c[x1][x1+1] = dimensao;
+    g[x1].push_back(x1+1);
+
+
+    for(int ed = 0; ed < edCount; ed++){
+        graph.addEdge(0,x1+1);
+        newfile >> x1 >> x2 >> x3 >> x4;
+        int from, to, cap;
+        from=x1;
+        to=x2;
+        cap=x3;
+        c[from][to] = cap;
+        g[from].push_back(to);
+        g[to].push_back(from);
+        graph.addEdge(x1,x2);
+    }
+    edmondsKarp(source,sink, dimensao);
+
+}
+void cenario2_1_simples(){
+    std::ofstream output;
+    output.open("output.txt");
+    int dimensao;
+    cout << "Que dimensao pretende?" << endl;
+    cin >> dimensao;
+    cout << "dimensao de: " << dimensao << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("input_simples.txt");
@@ -397,8 +566,42 @@ void cenario2_3(){
     edCount=x2;
     Graph graph(nodCount);
     int source, sink;
+    source=0;
+    sink=x1+1;
+    c[0][1] = dimensao;
+    g[0].push_back(1);
+    c[x1][x1+1] = dimensao;
+    g[x1].push_back(x1+1);
+
+
+    for(int ed = 0; ed < edCount; ed++){
+        graph.addEdge(0,x1+1);
+        newfile >> x1 >> x2 >> x3 >> x4;
+        int from, to, cap;
+        from=x1;
+        to=x2;
+        cap=x3;
+        c[from][to] = cap;
+        g[from].push_back(to);
+        g[to].push_back(from);
+        graph.addEdge(x1,x2);
+    }
+    edmondsKarp(source,sink, dimensao);
+
+}
+void cenario2_3_in01(){
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("in01_b.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    Graph graph(nodCount);
+    int source, sink;
     source=1;
-    sink=5;
+    sink=x1;
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
         int from, to, cap;
@@ -410,8 +613,59 @@ void cenario2_3(){
         g[to].push_back(from);
         graph.addEdge(x1,x2);
     }
-    int maxFlow = edmondsKarp(1, 5);
-    cout<<"Max Flow is:"<<maxFlow<<endl;
+    edmondsKarp(source, sink, 0);
+}
+void cenario2_3_in02(){
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("in02_b.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    Graph graph(nodCount);
+    int source, sink;
+    source=1;
+    sink=x1;
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        int from, to, cap;
+        from=x1;
+        to=x2;
+        cap=x3;
+        c[from][to] = cap;
+        g[from].push_back(to);
+        g[to].push_back(from);
+        graph.addEdge(x1,x2);
+    }
+    edmondsKarp(source, sink, 0);
+}
+void cenario2_3_simples(){
+    std::ofstream output;
+    output.open("output.txt");
+    int nodCount, edCount;
+    int x1, x2, x3, x4;
+    std::ifstream newfile("input_simples.txt");
+    newfile >> x1 >> x2;
+    nodCount=x1;
+    edCount=x2;
+    Graph graph(nodCount);
+    int source, sink;
+    source=1;
+    sink=x1;
+    for(int ed = 0; ed < edCount; ed++){
+        newfile >> x1 >> x2 >> x3 >> x4;
+        int from, to, cap;
+        from=x1;
+        to=x2;
+        cap=x3;
+        c[from][to] = cap;
+        g[from].push_back(to);
+        g[to].push_back(from);
+        graph.addEdge(x1,x2);
+    }
+    edmondsKarp(source, sink, 0);
 }
 
 
@@ -419,13 +673,21 @@ void displaymenu(){ cout<<"=====================================================
 cout<<" \t\tMENU \t \n ";
 cout<<"===================================================== \n";
 cout << "GRUPOS QUE NAO SE SEPARAM\n";
-cout<<" 1.Maximizar a dimensao do grupo e indicar encaminhamento.\n";
-cout<<" 2.Maximizar a dimensao do grupo e minimizar o número de transbordos, sem privilegiar um dos critérios relativamente ao outro.\n";
+cout<<" 1.Maximizar a dimensao do grupo e indicar encaminhamento.(input 01)\n";
+cout<<" 2.Maximizar a dimensao do grupo e indicar encaminhamento.(input 02)\n";
+cout<<" 3.Maximizar a dimensao do grupo e indicar encaminhamento.(input simples)\n";
+cout<<" 4.Maximizar a dimensao do grupo e minimizar o número de transbordos, sem privilegiar um dos critérios relativamente ao outro.(input 01)\n";
+cout<<" 5.Maximizar a dimensao do grupo e minimizar o número de transbordos, sem privilegiar um dos critérios relativamente ao outro.(input 02)\n";
+cout<<" 6.Maximizar a dimensao do grupo e minimizar o número de transbordos, sem privilegiar um dos critérios relativamente ao outro.(input simples)\n";
 cout<<"===================================================== \n";
 cout<<"GRUPOS QUE SE PODEM SEPARAR\n";
-cout<<" 3.Determinar um encaminhamento para um grupo, dada a sua dimensão.\n";
-cout<<" 4.View all student records \n";
-cout<<" 5.Determinar a dimensao maxima do grupo e um encaminhamento.\n";
+cout<<" 7.Determinar um encaminhamento para um grupo, dada a sua dimensão.(input 01)\n";
+cout<<" 8.Determinar um encaminhamento para um grupo, dada a sua dimensão.(input 02)\n";
+cout<<" 9.Determinar um encaminhamento para um grupo, dada a sua dimensão.(input simples)\n";
+cout<<" 10.Determinar a dimensao maxima do grupo e um encaminhamento.(input 01)\n";
+cout<<" 11.Determinar a dimensao maxima do grupo e um encaminhamento.(input 02)\n";
+cout<<" 12.Determinar a dimensao maxima do grupo e um encaminhamento.(input simples)\n";
+
 cout<<"===================================================== \n";
 }
 
@@ -437,10 +699,18 @@ int main(){
         cin>>yourchoice;
         switch (yourchoice)
         {
-            case 1: cenario1_1(); break;
-            case 2: cenario1_2(); break;
-            case 3: cenario2_1(); break;
-            case 5: cenario2_3(); break;
+            case 1: cenario1_1_in01(); break;
+            case 2: cenario1_1_in02(); break;
+            case 3: cenario1_1_simples(); break;
+            case 4: cenario1_2_in01(); break;
+            case 5: cenario1_2_in02(); break;
+            case 6: cenario1_2_simples(); break;
+            case 7: cenario2_1_in01(); break;
+            case 8: cenario2_1_in02(); break;
+            case 9: cenario2_1_simples(); break;
+            case 10: cenario2_3_in01(); break;
+            case 11: cenario2_3_in02(); break;
+            case 12: cenario2_3_simples(); break;
             default: cout<<"invalid"; break;
         }
 
