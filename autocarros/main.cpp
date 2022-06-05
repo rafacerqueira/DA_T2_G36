@@ -345,21 +345,31 @@ void edmondsKarp(int sNode, int eNode, int dimensao){
 void cenario1_1_in01() {
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in01_b.txt");
     newfile >> x1 >> x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     nodCount=x1;
     edCount=x2;
     Graph g(x1);
-    //read numbers in file and save in graph g and save in array c[][] the capacity
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
         g.addEdge(x1,x2);
         c[x1][x2]=x3;
     }
     newfile.close();
-    g.printAllPaths(1,nodCount, output);
+    g.printAllPaths(source,sink, output);
     output.close();
     std::ifstream file("output.txt");
     read(file);
@@ -367,10 +377,21 @@ void cenario1_1_in01() {
 void cenario1_1_in02() {
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in02_b.txt");
     newfile >> x1 >> x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     nodCount=x1;
     edCount=x2;
     Graph g(x1);
@@ -380,7 +401,7 @@ void cenario1_1_in02() {
         c[x1][x2]=x3;
     }
     newfile.close();
-    g.printAllPaths(1,nodCount, output);
+    g.printAllPaths(source,sink, output);
     output.close();
     std::ifstream file("output.txt");
     read(file);
@@ -388,10 +409,21 @@ void cenario1_1_in02() {
 void cenario1_1_simples() {
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("input_simples.txt");
     newfile >> x1 >> x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     nodCount=x1;
     edCount=x2;
     Graph g(x1);
@@ -401,7 +433,7 @@ void cenario1_1_simples() {
         c[x1][x2]=x3;
     }
     newfile.close();
-    g.printAllPaths(1,nodCount, output);
+    g.printAllPaths(source,sink, output);
     output.close();
     std::ifstream file("output.txt");
     read(file);
@@ -409,10 +441,21 @@ void cenario1_1_simples() {
 void cenario1_2_in01(){
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in01_b.txt");
     newfile >> x1 >> x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     nodCount=x1;
     edCount=x2;
     Graph g(x1);
@@ -422,7 +465,7 @@ void cenario1_2_in01(){
         c[x1][x2]=x3;
     }
     newfile.close();
-    g.printAllPaths(1,nodCount, output);
+    g.printAllPaths(source,sink, output);
     output.close();
     std::ifstream file("output.txt");
     read_transbordos(file);
@@ -430,10 +473,21 @@ void cenario1_2_in01(){
 void cenario1_2_in02(){
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in02_b.txt");
     newfile >> x1 >> x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     nodCount=x1;
     edCount=x2;
     Graph g(x1);
@@ -443,7 +497,7 @@ void cenario1_2_in02(){
         c[x1][x2]=x3;
     }
     newfile.close();
-    g.printAllPaths(1,nodCount, output);
+    g.printAllPaths(source,sink, output);
     output.close();
     std::ifstream file("output.txt");
     read_transbordos(file);
@@ -451,10 +505,21 @@ void cenario1_2_in02(){
 void cenario1_2_simples(){
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("input_simples.txt");
     newfile >> x1 >> x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     nodCount=x1;
     edCount=x2;
     Graph g(x1);
@@ -464,7 +529,7 @@ void cenario1_2_simples(){
         c[x1][x2]=x3;
     }
     newfile.close();
-    g.printAllPaths(1,nodCount, output);
+    g.printAllPaths(source,sink, output);
     output.close();
     std::ifstream file("output.txt");
     read_transbordos(file);
@@ -476,16 +541,26 @@ void cenario2_1_in01(){
     cout << "Que dimensao pretende?" << endl;
     cin >> dimensao;
     cout << "dimensao de: " << dimensao << endl;
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in01_b.txt");
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     Graph graph(nodCount);
-    int source, sink;
-    source=0;
-    sink=x1+1;
+    source--;
+    sink++;
     c[0][1] = dimensao;
     g[0].push_back(1);
     c[x1][x1+1] = dimensao;
@@ -505,7 +580,6 @@ void cenario2_1_in01(){
         graph.addEdge(x1,x2);
     }
     edmondsKarp(source,sink, dimensao);
-
 }
 void cenario2_1_in02(){
     std::ofstream output;
@@ -514,16 +588,26 @@ void cenario2_1_in02(){
     cout << "Que dimensao pretende?" << endl;
     cin >> dimensao;
     cout << "dimensao de: " << dimensao << endl;
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in02_b.txt");
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     Graph graph(nodCount);
-    int source, sink;
-    source=0;
-    sink=x1+1;
+    source--;
+    sink++;
     c[0][1] = dimensao;
     g[0].push_back(1);
     c[x1][x1+1] = dimensao;
@@ -552,16 +636,26 @@ void cenario2_1_simples(){
     cout << "Que dimensao pretende?" << endl;
     cin >> dimensao;
     cout << "dimensao de: " << dimensao << endl;
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("input_simples.txt");
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     Graph graph(nodCount);
-    int source, sink;
-    source=0;
-    sink=x1+1;
+    source--;
+    sink++;
     c[0][1] = dimensao;
     g[0].push_back(1);
     c[x1][x1+1] = dimensao;
@@ -586,16 +680,24 @@ void cenario2_1_simples(){
 void cenario2_3_in01(){
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in01_b.txt");
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     Graph graph(nodCount);
-    int source, sink;
-    source=1;
-    sink=x1;
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
         int from, to, cap;
@@ -612,16 +714,24 @@ void cenario2_3_in01(){
 void cenario2_3_in02(){
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("in02_b.txt");
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     Graph graph(nodCount);
-    int source, sink;
-    source=1;
-    sink=x1;
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
         int from, to, cap;
@@ -638,16 +748,24 @@ void cenario2_3_in02(){
 void cenario2_3_simples(){
     std::ofstream output;
     output.open("output.txt");
+    cout << "Source vertice ? ";
+    int source, sink;
+    cin >> source;
+    cout << endl;
+    cout << "Sink vertice ? ";
+    cin >> sink;
+    cout << endl;
     int nodCount, edCount;
     int x1, x2, x3, x4;
     std::ifstream newfile("input_simples.txt");
     newfile >> x1 >> x2;
     nodCount=x1;
     edCount=x2;
+    if(source < 1 || sink > x1){
+        cout << "Invalid source and sink" << endl << "source and sink must be between 1 and " << x1 << endl;
+        return;
+    }
     Graph graph(nodCount);
-    int source, sink;
-    source=1;
-    sink=x1;
     for(int ed = 0; ed < edCount; ed++){
         newfile >> x1 >> x2 >> x3 >> x4;
         int from, to, cap;
